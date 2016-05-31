@@ -1,5 +1,7 @@
 {
   "loopback-component-explorer": {
-    "mountPath": "/explorer"
+    "mountPath": "/explorer",
+    "host": "localhost:3000",
+    "protocol": "http"
   }
 }
