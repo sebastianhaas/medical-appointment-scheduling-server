@@ -1,0 +1,27 @@
+{
+  "name": "AuditLogEntry",
+  "plural": "AuditLogEntries",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "objectId": {
+      "type": "number",
+      "required": true
+    },
+    "author": {
+      "type": "number",
+      "required": true
+    },
+    "timestamp": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
