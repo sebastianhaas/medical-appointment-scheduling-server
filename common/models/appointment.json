@@ -24,7 +24,16 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "patient": {
+      "type": "belongsTo",
+      "model": "Patient"
+    },
+    "room": {
+      "type": "belongsTo",
+      "model": "Room"
+    }
+  },
   "acls": [],
   "methods": {}
 }
