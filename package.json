@@ -1,7 +1,11 @@
 {
   "name": "medical-appointment-scheduling-server",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "main": "server/server.js",
+  "license": "MIT",
+  "description": "medical-appointment-scheduling-server",
+  "author": "Sebastian Haas <sebastian@haas.tech>",
+  "homepage": "https://github.com/sebastianhaas/medical-appointment-scheduling",
   "scripts": {
     "start": "node .",
     "pretest": "jshint .",
@@ -23,9 +27,14 @@
     "nsp": "^2.1.0"
   },
   "repository": {
-    "type": "",
-    "url": ""
+    "type": "git",
+    "url": "https://github.com/sebastianhaas/medical-appointment-scheduling-server.git"
   },
-  "license": "UNLICENSED",
-  "description": "medical-appointment-scheduling-server"
+    "bugs": {
+    "url": "https://github.com/sebastianhaas/medical-appointment-scheduling-server.git/issues"
+  },
+  "engines": {
+    "node": ">= 5.8.0",
+    "npm": ">= 3.9.5"
+  }
 }
