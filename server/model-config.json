@@ -28,5 +28,9 @@
   "AuditLogEntry": {
     "dataSource": "postgresql",
     "public": true
+  },
+  "Room": {
+    "dataSource": "postgresql",
+    "public": true
   }
 }
