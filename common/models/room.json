@@ -6,6 +6,9 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "Audit": true
+  },
   "properties": {
     "name": {
       "type": "string",
