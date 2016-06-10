@@ -12,6 +12,9 @@
     "posttest": "nsp check"
   },
   "dependencies": {
+    "bunyan": "^1.8.1",
+    "bunyan-request": "^1.2.0",
+    "bunyan-syslog": "^0.3.1",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
     "helmet": "^2.1.0",
@@ -30,7 +33,7 @@
     "type": "git",
     "url": "https://github.com/sebastianhaas/medical-appointment-scheduling-server.git"
   },
-    "bugs": {
+  "bugs": {
     "url": "https://github.com/sebastianhaas/medical-appointment-scheduling-server.git/issues"
   },
   "engines": {
