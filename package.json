@@ -8,7 +8,7 @@
   "homepage": "https://github.com/sebastianhaas/medical-appointment-scheduling",
   "scripts": {
     "start": "node .",
-    "pretest": "jshint .",
+    "pretest": "jscs . && jshint .",
     "posttest": "nsp check"
   },
   "dependencies": {
@@ -26,6 +26,7 @@
     "serve-favicon": "^2.0.1"
   },
   "devDependencies": {
+    "jscs": "^3.0.4",
     "jshint": "^2.5.6",
     "nsp": "^2.1.0"
   },

@@ -1,0 +1,7 @@
+{
+    "preset": "google",
+    "maximumLineLength": {
+      "value": 90,
+      "allExcept": ["comments", "regex"]
+    },
+}
