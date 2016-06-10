@@ -5,6 +5,6 @@ node_js:
 - node
 sudo: false
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install build-essential -y
-  - sudo apt-get install gcc-4.8 -y
+  - apt-get -qq update
+  - apt-get install build-essential
+  - apt-get install gcc-4.8
