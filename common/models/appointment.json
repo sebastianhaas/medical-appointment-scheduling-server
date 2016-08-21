@@ -32,6 +32,11 @@
     "room": {
       "type": "belongsTo",
       "model": "Room"
+    },
+    "examinations": {
+      "type": "hasAndBelongsToMany",
+      "model": "Examination",
+      "foreignKey": ""
     }
   },
   "acls": [],

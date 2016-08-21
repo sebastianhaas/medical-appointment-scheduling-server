@@ -19,7 +19,7 @@
   },
   "Examination": {
     "dataSource": "postgresql",
-    "public": false
+    "public": true
   },
   "Patient": {
     "dataSource": "postgresql",

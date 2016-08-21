@@ -1,9 +1,13 @@
 {
   "name": "Examination",
+  "plural": "Examinations",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
+  },
+  "mixins": {
+    "Audit": true
   },
   "properties": {
     "name": {

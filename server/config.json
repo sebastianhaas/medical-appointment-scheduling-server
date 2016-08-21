@@ -23,5 +23,10 @@
       "disableStackTrace": false
     }
   },
-  "legacyExplorer": false
+  "legacyExplorer": false,
+
+
+  "businessHoursStart": "08:00:00",
+  "businessHoursEnd": "17:00:00",
+  "businessDays": [2, 3, 4, 5, 6]
 }
