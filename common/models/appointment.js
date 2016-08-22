@@ -85,7 +85,7 @@ module.exports = function(Appointment) {
             id: 'NewAppointment',
             duration: results.funcDuration,
             minSchedule: results.funcDuration,
-            resources: results.resourcesRequired
+            resources: results.funcResourcesRequired
           }
         ];
 
@@ -96,7 +96,6 @@ module.exports = function(Appointment) {
           results.funcSchedule,
           new Date(1471109510000)
         ));
-
       }
     });
 
