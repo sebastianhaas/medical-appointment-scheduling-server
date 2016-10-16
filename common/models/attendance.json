@@ -1,0 +1,27 @@
+{
+  "name": "Attendance",
+  "plural": "Attendances",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "checkedIn": {
+      "type": "date",
+      "required": false
+    },
+    "underTreatment": {
+      "type": "date",
+      "required": false
+    },
+    "finished": {
+      "type": "date",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

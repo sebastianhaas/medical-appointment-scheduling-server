@@ -89,13 +89,20 @@ module.exports = function(Appointment) {
           }
         ];
 
-        // Create schedule and return request
-        cb(null, schedulejs.create(
-          tasks,
-          results.funcResources,
-          results.funcSchedule,
-          new Date(1471109510000)
-        ));
+        if (!tasks || results.funcResources.length <= 0  || results.funcSchedule.length <= 0) {
+          var error = new Error();
+          error.status = 500;
+          error.message = 'Not all required resources were found.';
+          cb(error);
+        } else {
+          // Create schedule and return request
+          cb(null, schedulejs.create(
+            tasks,
+            results.funcResources,
+            results.funcSchedule,
+            new Date()
+          ));
+        }
       }
     });
 

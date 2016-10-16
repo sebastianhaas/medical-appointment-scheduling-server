@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Doctor's Room",
+    "description": "A random doctor's room.",
+    "createdBy": 0,
+    "modifiedBy": 0
+  },
+  {
+    "name": "Conference Room",
+    "description": "A conference room for patient-doctor discussions.",
+    "createdBy": 0,
+    "modifiedBy": 0
+  },
+  {
+    "name": "OR",
+    "description": "Our OR.",
+    "createdBy": 0,
+    "modifiedBy": 0
+  }
+]

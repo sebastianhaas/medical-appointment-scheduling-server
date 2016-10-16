@@ -17,6 +17,10 @@
     "dataSource": "postgresql",
     "public": true
   },
+   "Attendance": {
+    "dataSource": "postgresql",
+    "public": true
+  },
   "Examination": {
     "dataSource": "postgresql",
     "public": true

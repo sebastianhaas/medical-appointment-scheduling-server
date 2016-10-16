@@ -33,6 +33,10 @@
       "type": "belongsTo",
       "model": "Room"
     },
+    "attendance": {
+      "type": "hasOne",
+      "model": "Attendance"
+    },
     "examinations": {
       "type": "hasAndBelongsToMany",
       "model": "Examination",
