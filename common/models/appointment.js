@@ -89,7 +89,11 @@ module.exports = function(Appointment) {
           }
         ];
 
-        if (!tasks || results.funcResources.length <= 0  || results.funcSchedule.length <= 0) {
+        if (
+          !tasks ||
+          results.funcResources.length <= 0  ||
+          results.funcSchedule.length <= 0
+        ) {
           var error = new Error();
           error.status = 400;
           error.message = 'Not all required resources were found.';
@@ -100,7 +104,8 @@ module.exports = function(Appointment) {
             tasks,
             results.funcResources,
             results.funcSchedule,
-            startDate ? startDate : moment().hour(0).minute(0).second(0).millisecond(0).add(1, 'day').toDate()
+            startDate ? startDate : moment().hour(0).minute(0).second(0).millisecond(0)
+                                    .add(1, 'day').toDate()
           ));
         }
       }
@@ -217,7 +222,7 @@ module.exports = function(Appointment) {
         cb(null, parseInt(info.count));
       }
     });
-  }
+  };
 
   Appointment.remoteMethod(
     'deleteAllAppointments',
@@ -236,7 +241,7 @@ module.exports = function(Appointment) {
         cb(null, parseInt(info.count));
       }
     });
-  }
+  };
 
   Appointment.remoteMethod(
     'generateRandomAppointments',
@@ -300,7 +305,7 @@ module.exports = function(Appointment) {
             }
           });
         }
-    }, function(err, results) {
+      }, function(err, results) {
       if (err) {
         cb(err);
       } else {
@@ -310,12 +315,12 @@ module.exports = function(Appointment) {
         var currDate = startDate.clone();
 
         async.during(
-          function (callback) {
+          function(callback) {
             return callback(null, currDate.diff(endDate) <= 0);
           },
-          function (callback) {
+          function(callback) {
             // Check if currDate is not a free day
-            if (freeDays.indexOf(currDate.isoWeekday()) == -1) {
+            if (freeDays.indexOf(currDate.isoWeekday()) === -1) {
               generateRandomAppointmentsForDay(
                 currDate,
                 results.examinations,
@@ -328,8 +333,8 @@ module.exports = function(Appointment) {
             }
             currDate.add(1, 'day');
           },
-          function (err) {
-            if(err) {
+          function(err) {
+            if (err) {
               cb(err);
             } else {
               console.log('Finished generating random appointments for all days.');
@@ -339,9 +344,11 @@ module.exports = function(Appointment) {
         );
       }
     });
-  }
+  };
 
-  function generateRandomAppointmentsForDay(date, examinations, patients, rooms, mainCallback) {
+  function generateRandomAppointmentsForDay(
+    date, examinations, patients, rooms, mainCallback
+  ) {
     var startOfDay = date.clone().startOf('day');
     var endOfDay = date.clone().endOf('day');
     console.log('Generate appointments for ' + startOfDay.format());
@@ -351,19 +358,21 @@ module.exports = function(Appointment) {
     async.during(
 
       // Check if we need to find more appointments for today
-      function (callback) {
+      function(callback) {
         // Create new appointments as long as the day is not fully booked
         return callback(null, !dayFullyBooked);
       },
 
       // Find another appointment for the current day
-      function (callback) {
+      function(callback) {
         // Select random patient and examination
         var randExam = examinations[Math.floor(Math.random() * examinations.length)];
         var randPatient = patients[Math.floor(Math.random() * patients.length)];
 
         // And find an appointment
-        Appointment.findTime(randExam.duration, randExam.id, null, startOfDay.toDate(), function(err, schedule) {
+        Appointment.findTime(
+         randExam.duration, randExam.id, null, startOfDay.toDate(),
+         function(err, schedule) {
           if (err) {
             callback(err);
           } else {
@@ -400,7 +409,7 @@ module.exports = function(Appointment) {
                     } else {
                       callback(null);
                     }
-                  })
+                  });
                 }
               });
             }
@@ -409,8 +418,8 @@ module.exports = function(Appointment) {
       },
 
       // Day is fully booked, finish up
-      function (err) {
-        if(err) {
+      function(err) {
+        if (err) {
           mainCallback(err);
         } else {
           console.log('Day fully booked. Finished adding appointments for ....');

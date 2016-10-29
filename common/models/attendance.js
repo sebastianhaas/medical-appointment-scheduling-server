@@ -11,7 +11,7 @@ module.exports = function(Attendance) {
         cb(null, parseInt(info.count));
       }
     });
-  }
+  };
 
   Attendance.remoteMethod(
     'deleteAllAttendances',
@@ -25,14 +25,14 @@ module.exports = function(Attendance) {
   Attendance.generateRandomAttendances = function(cb) {
     var attendances = [];
     Attendance.app.models.Appointment.find(null, function(err, appointments) {
-      if(err) {
+      if (err) {
         cb(err);
       } else {
         for (var i = appointments.length - 1; i >= 0; i--) {
           attendances.push(generateRandomAttendance(appointments[i]));
         }
         Attendance.create(attendances, function(err, results) {
-          if(err) {
+          if (err) {
             cb(err);
           } else {
             cb(null, results);
@@ -40,16 +40,19 @@ module.exports = function(Attendance) {
         });
       }
     });
-  }
+  };
 
   function generateRandomAttendance(appointment) {
-    var checkedIn = getNormalDistributedDate(moment(appointment.start).subtract(15, 'minutes'), 15);
-
-    var underTreatment = getNormalDistributedDate(moment(appointment.start).add(5, 'minutes'), 5);
-
+    var checkedIn = getNormalDistributedDate(moment(appointment.start)
+                    .subtract(15, 'minutes'), 15);
+    var underTreatment = getNormalDistributedDate(moment(appointment.start)
+                         .add(5, 'minutes'), 5);
     var plannedDuration = moment(appointment.end).diff(moment(appointment.start));
-    while(!finished || finished.isSameOrBefore(underTreatment)) {
-      var finished = getNormalDistributedDate(underTreatment.clone().add(plannedDuration), 10);
+    var finished;
+
+    while (!finished || finished.isSameOrBefore(underTreatment)) {
+      finished = getNormalDistributedDate(underTreatment.clone()
+                     .add(plannedDuration), 10);
     }
 
     return {

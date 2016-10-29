@@ -18,7 +18,7 @@ module.exports = function(Room) {
         cb(null, models.length);
       }
     });
-  }
+  };
 
   Room.remoteMethod(
     'deleteAllRooms',
@@ -37,6 +37,6 @@ module.exports = function(Room) {
         cb(null, info.count);
       }
     });
-  }
+  };
 
 };

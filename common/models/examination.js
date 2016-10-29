@@ -1,5 +1,7 @@
 module.exports = function(Examination) {
 
+  const possibleDurations = ['PT20M', 'PT30M', 'PT40M', 'PT1H', 'PT1H30M', 'PT2H'];
+
   Examination.remoteMethod(
     'insertTestData',
     {
@@ -13,9 +15,9 @@ module.exports = function(Examination) {
     const parse = require('csv-parse');
     const fs = require('fs');
     const materialPaletts = require('google-material-color').palette;
-    delete materialPaletts['White'];
-    delete materialPaletts['Black'];
-    delete materialPaletts['Grey'];
+    delete materialPaletts.White;
+    delete materialPaletts.Black;
+    delete materialPaletts.Grey;
     const keys = Object.keys(materialPaletts);
     const testData = './test/data/CMS32_DESC_LONG_SHORT_SG.csv';
     var examinations = [];
@@ -34,12 +36,14 @@ module.exports = function(Examination) {
         created: Date.now(),
         modifiedBy: 0,
         modified: Date.now(),
+        /* jshint ignore:start */
         backgroundColor: materialPaletts[keys[ keys.length * Math.random() << 0]]['500'],
+        /* jshint ignore:end */
         color: '#FFFFFF',
         duration: possibleDurations[Math.floor(Math.random() * possibleDurations.length)]
       });
     })
-    .on('end',function() {
+    .on('end', function() {
       console.log('Finished reading from csv.');
       Examination.create(examinations, function(err, models) {
         if (err) {
@@ -52,7 +56,7 @@ module.exports = function(Examination) {
     .on('error', function(error) {
       cb(error);
     });
-  }
+  };
 
   Examination.deleteAllExaminations = function(cb) {
     Examination.destroyAll(null, function(err, info) {
@@ -62,7 +66,7 @@ module.exports = function(Examination) {
         cb(null, parseInt(info.count));
       }
     });
-  }
+  };
 
   Examination.remoteMethod(
     'deleteAllExaminations',
@@ -72,7 +76,5 @@ module.exports = function(Examination) {
       returns: {arg: 'deletedCount', type: 'number'}
     }
   );
-
-  const possibleDurations = ['PT20M', 'PT30M', 'PT40M', 'PT1H', 'PT1H30M', 'PT2H'];
 
 };

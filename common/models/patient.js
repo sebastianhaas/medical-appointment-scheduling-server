@@ -18,7 +18,7 @@ module.exports = function(Patient) {
         cb(null, models.length);
       }
     });
-  }
+  };
 
   Patient.remoteMethod(
     'deleteAllPatients',
@@ -37,6 +37,6 @@ module.exports = function(Patient) {
         cb(null, info.count);
       }
     });
-  }
+  };
 
 };
