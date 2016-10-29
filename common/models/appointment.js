@@ -20,7 +20,7 @@ module.exports = function(Appointment) {
     getConfiguration(app);
   });
 
-  Appointment.findTime = function(durationString, examinationId, roomId, cb) {
+  Appointment.findTime = function(durationString, examinationId, roomId, startDate, cb) {
 
     // Prepare tasks and resources to calculate schedule in parallel
     async.parallel({
@@ -91,7 +91,7 @@ module.exports = function(Appointment) {
 
         if (!tasks || results.funcResources.length <= 0  || results.funcSchedule.length <= 0) {
           var error = new Error();
-          error.status = 500;
+          error.status = 400;
           error.message = 'Not all required resources were found.';
           cb(error);
         } else {
@@ -100,7 +100,7 @@ module.exports = function(Appointment) {
             tasks,
             results.funcResources,
             results.funcSchedule,
-            new Date()
+            startDate ? startDate : moment().hour(0).minute(0).second(0).millisecond(0).add(1, 'day').toDate()
           ));
         }
       }
@@ -116,7 +116,8 @@ module.exports = function(Appointment) {
       accepts: [
         {arg: 'duration', type: 'string', required: true, http: {source: 'query'}},
         {arg: 'examinationId', type: 'number', required: false, http: {source: 'query'}},
-        {arg: 'roomId', type: 'number', required: false, http: {source: 'query'}}
+        {arg: 'roomId', type: 'number', required: false, http: {source: 'query'}},
+        {arg: 'startDate', type: 'date', 'required': false, http: {source: 'query'}}
       ],
       returns: {arg: 'startDates', type: 'object', root: true}
     }
@@ -207,4 +208,217 @@ module.exports = function(Appointment) {
       businessDays       = app.get('businessDays');
     }
   }
+
+  Appointment.deleteAllAppointments = function(cb) {
+    Appointment.destroyAll(null, function(err, info) {
+      if (err) {
+        cb(err);
+      } else {
+        cb(null, parseInt(info.count));
+      }
+    });
+  }
+
+  Appointment.remoteMethod(
+    'deleteAllAppointments',
+    {
+      description: 'Deletes all data.',
+      http: {path: '/deleteAll', verb: 'delete'},
+      returns: {arg: 'deletedCount', type: 'number'}
+    }
+  );
+
+  Appointment.deleteAllAppointments = function(cb) {
+    Appointment.destroyAll(null, function(err, info) {
+      if (err) {
+        cb(err);
+      } else {
+        cb(null, parseInt(info.count));
+      }
+    });
+  }
+
+  Appointment.remoteMethod(
+    'generateRandomAppointments',
+    {
+      description: 'Deletes all data.',
+      accepts: [
+        {arg: 'freeDays', type: 'array', required: false, http: {source: 'query'}},
+        {arg: 'startDate', type: 'date', required: false, http: {source: 'query'}},
+        {arg: 'endDate', type: 'date', required: false, http: {source: 'query'}}
+      ],
+      http: {path: '/generateRandomAppointments', verb: 'post'},
+      returns: {arg: 'success', type: 'boolean'}
+    }
+  );
+
+  Appointment.generateRandomAppointments = function(freeDays, startDate, endDate, cb) {
+    // Take care of parameters and defaults
+    if (startDate) {
+      startDate = moment(startDate).startOf('day');
+    } else {
+      startDate = moment().startOf('isoWeek').startOf('day');
+    }
+    if (endDate) {
+      endDate = moment(endDate).startOf('day');
+    } else {
+      endDate = moment().endOf('isoWeek').startOf('day');
+    }
+    if (!freeDays) {
+      freeDays = [7]; // Sunday is free by default
+    }
+
+    // Get all examinations, patients and rooms
+    async.parallel({
+        examinations: function(callback) {
+          Appointment.app.models.Examination.find(null, function(err, result) {
+            if (err) {
+              callback(err);
+            } else {
+              console.log('Retrieved examinations.');
+              callback(null, result);
+            }
+          });
+        },
+        patients: function(callback) {
+          Appointment.app.models.Patient.find(null, function(err, result) {
+            if (err) {
+              callback(err);
+            } else {
+              console.log('Retrieved patients.');
+              callback(null, result);
+            }
+          });
+        },
+        rooms: function(callback) {
+          Appointment.app.models.Room.find(null, function(err, result) {
+            if (err) {
+              callback(err);
+            } else {
+              console.log('Retrieved rooms.');
+              callback(null, result);
+            }
+          });
+        }
+    }, function(err, results) {
+      if (err) {
+        cb(err);
+      } else {
+        console.log('Finished preparation tasks.');
+
+        // Iterate day by day over timespan and add random appointments
+        var currDate = startDate.clone();
+
+        async.during(
+          function (callback) {
+            return callback(null, currDate.diff(endDate) <= 0);
+          },
+          function (callback) {
+            // Check if currDate is not a free day
+            if (freeDays.indexOf(currDate.isoWeekday()) == -1) {
+              generateRandomAppointmentsForDay(
+                currDate,
+                results.examinations,
+                results.patients,
+                results.rooms,
+                callback
+              );
+            } else {
+              console.log('Ignoring ... since it\'s being activeley ignored.');
+            }
+            currDate.add(1, 'day');
+          },
+          function (err) {
+            if(err) {
+              cb(err);
+            } else {
+              console.log('Finished generating random appointments for all days.');
+              cb(null, true);
+            }
+          }
+        );
+      }
+    });
+  }
+
+  function generateRandomAppointmentsForDay(date, examinations, patients, rooms, mainCallback) {
+    var startOfDay = date.clone().startOf('day');
+    var endOfDay = date.clone().endOf('day');
+    console.log('Generate appointments for ' + startOfDay.format());
+    var dayFullyBooked = false;
+    var appointments = [];
+
+    async.during(
+
+      // Check if we need to find more appointments for today
+      function (callback) {
+        // Create new appointments as long as the day is not fully booked
+        return callback(null, !dayFullyBooked);
+      },
+
+      // Find another appointment for the current day
+      function (callback) {
+        // Select random patient and examination
+        var randExam = examinations[Math.floor(Math.random() * examinations.length)];
+        var randPatient = patients[Math.floor(Math.random() * patients.length)];
+
+        // And find an appointment
+        Appointment.findTime(randExam.duration, randExam.id, null, startOfDay.toDate(), function(err, schedule) {
+          if (err) {
+            callback(err);
+          } else {
+            console.log('For patient ' + randPatient.name);
+            console.log(schedule.success);
+            console.log(schedule.scheduledTasks.NewAppointment);
+            if (moment(schedule.start).isAfter(endOfDay)) {
+              // The appointment was scheduled for the next day
+              dayFullyBooked = true;
+              console.log('Scheduled for the next day, unfortunately.');
+              callback(null);
+            } else {
+              // The appointment was scheduled for the given day, so add it
+              var slot = schedule.scheduledTasks.NewAppointment.schedule[0];
+              Appointment.create({
+                title: '',
+                description: '',
+                start: new Date(slot.start),
+                end: new Date(slot.end),
+                roomId: slot.resources[0],
+                patientId: randPatient.id,
+                created: new Date(),
+                modified: new Date(),
+                createdBy: 0,
+                modifiedBy: 0
+              }, function(err, newAppointment) {
+                if (err) {
+                  callback(err);
+                } else {
+                  console.log('Found and inserted: ' + newAppointment);
+                  newAppointment.examinations.add(randExam.id, function(err) {
+                    if (err) {
+                      callback(err);
+                    } else {
+                      callback(null);
+                    }
+                  })
+                }
+              });
+            }
+          }
+        });
+      },
+
+      // Day is fully booked, finish up
+      function (err) {
+        if(err) {
+          mainCallback(err);
+        } else {
+          console.log('Day fully booked. Finished adding appointments for ....');
+          mainCallback(null);
+        }
+      }
+
+    );
+  }
+
 };

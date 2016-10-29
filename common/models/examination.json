@@ -15,7 +15,13 @@
       "required": true
     },
     "duration": {
-      "type": "number"
+      "type": "string"
+    },
+    "backgroundColor": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
     }
   },
   "validations": [],
