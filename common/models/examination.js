@@ -12,6 +12,7 @@ module.exports = function(Examination) {
   );
 
   Examination.insertTestData = function(cb) {
+    const path = require('path');
     const parse = require('csv-parse');
     const fs = require('fs');
     const materialPaletts = require('google-material-color').palette;
@@ -19,11 +20,11 @@ module.exports = function(Examination) {
     delete materialPaletts.Black;
     delete materialPaletts.Grey;
     const keys = Object.keys(materialPaletts);
-    const testData = './test/data/CMS32_DESC_LONG_SHORT_SG.csv';
+    const testData = '../../test/data/CMS32_DESC_LONG_SHORT_SG.csv';
     var examinations = [];
     var header = true;
 
-    fs.createReadStream(testData)
+    fs.createReadStream(path.join(__dirname, testData))
     .pipe(parse())
     .on('data', function(csvrow) {
       if (header) {
