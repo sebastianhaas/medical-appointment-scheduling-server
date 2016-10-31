@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node .",
     "pretest": "jscs --fix . && jshint .",
-    "posttest": "nsp check"
+    "posttest": "nsp check",
+    "heroku-postbuild": "node bin/automigrate.js"
   },
   "dependencies": {
     "async": "^2.0.1",
