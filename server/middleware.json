@@ -6,8 +6,7 @@
     "compression": {},
     "cors": {
       "params": {
-        "origin": "https://scheduling-client.herokuapp.com",
-        "maxAge": 86400
+        "origin": "false"
       }
     },
     "helmet#xssFilter": {},
