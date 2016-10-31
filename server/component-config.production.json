@@ -1,0 +1,7 @@
+{
+  "loopback-component-explorer": {
+    "mountPath": "/explorer",
+    "host": "scheduling-server.herokuapp.com",
+    "protocol": "https"
+  }
+}
