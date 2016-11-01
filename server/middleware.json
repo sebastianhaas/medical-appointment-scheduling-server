@@ -6,7 +6,10 @@
     "compression": {},
     "cors": {
       "params": {
-        "origin": "https://scheduling-server.herokuapp.com"
+        "origin": [
+          "https://scheduling-server.herokuapp.com",
+          "https://scheduling-client.herokuapp.com"
+        ]
       }
     },
     "helmet#xssFilter": {},
