@@ -7,11 +7,14 @@ module.exports = function(Examination) {
     {
       description: 'Insert sample data set of test examinations.',
       http: {path: '/insertTestData', verb: 'post'},
+      accepts: [
+        {arg: 'language', type: 'string', 'required': false, http: {source: 'query'}}
+      ],
       returns: {arg: 'insertCount', type: 'number'}
     }
   );
 
-  Examination.insertTestData = function(cb) {
+  Examination.insertTestData = function(language, cb) {
     const path = require('path');
     const parse = require('csv-parse');
     const fs = require('fs');
@@ -32,7 +35,8 @@ module.exports = function(Examination) {
         return;
       }
       examinations.push({
-        name: csvrow[1],
+        name: language === 'de' ? csvrow[3] : csvrow[1],
+        code: csvrow[0],
         createdBy: 0,
         created: Date.now(),
         modifiedBy: 0,

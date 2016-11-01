@@ -22,6 +22,9 @@
     },
     "color": {
       "type": "string"
+    },
+    "code": {
+      "type": "string"
     }
   },
   "validations": [],
