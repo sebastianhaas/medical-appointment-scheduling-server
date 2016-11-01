@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Arztzimmer",
+    "description": "Ein Behandlungsraum.",
+    "createdBy": 0,
+    "modifiedBy": 0
+  },
+  {
+    "name": "Besprechungsraum",
+    "description": "Ein Besprechungsraum für Aufklärungsgespräche.",
+    "createdBy": 0,
+    "modifiedBy": 0
+  },
+  {
+    "name": "OP",
+    "description": "Ein Operationssaal.",
+    "createdBy": 0,
+    "modifiedBy": 0
+  }
+]

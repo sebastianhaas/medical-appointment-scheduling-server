@@ -5,12 +5,20 @@ module.exports = function(Patient) {
     {
       description: 'Insert sample data set of test patients.',
       http: {path: '/insertTestData', verb: 'post'},
+      accepts: [
+        {arg: 'locale', type: 'string', 'required': false, http: {source: 'query'}}
+      ],
       returns: {arg: 'insertCount', type: 'number'}
     }
   );
 
-  Patient.insertTestData = function(cb) {
-    var testData = require('../../test/data/patients.json');
+  Patient.insertTestData = function(locale, cb) {
+    var testData;
+    if (locale === 'de-AT') {
+      testData = require('../../test/data/patients_de-AT.json');
+    } else {
+      testData = require('../../test/data/patients_en-US.json');
+    }
     Patient.create(testData, function(err, models) {
       if (err) {
         cb(err);

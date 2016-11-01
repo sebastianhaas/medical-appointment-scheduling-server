@@ -1,6 +1,6 @@
 module.exports = function(Examination) {
 
-  const possibleDurations = ['PT20M', 'PT30M', 'PT40M', 'PT1H', 'PT1H30M', 'PT2H'];
+  const possibleDurations = ['PT30M', 'PT40M', 'PT1H', 'PT1H30M', 'PT2H'];
 
   Examination.remoteMethod(
     'insertTestData',
@@ -23,7 +23,7 @@ module.exports = function(Examination) {
     delete materialPaletts.Black;
     delete materialPaletts.Grey;
     const keys = Object.keys(materialPaletts);
-    const testData = '../../test/data/CMS32_DESC_LONG_SHORT_SG.csv';
+    const testData = '../../test/data/examinations-icd.csv';
     var examinations = [];
     var header = true;
 

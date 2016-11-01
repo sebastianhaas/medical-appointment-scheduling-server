@@ -7,9 +7,41 @@
     "validateUpsert": true
   },
   "properties": {
-    "name": {
+    "givenName": {
       "type": "string",
       "required": true
+    },
+    "surname": {
+      "type": "string",
+      "required": true
+    },
+    "gender": {
+      "type": "string",
+      "required": true
+    },
+    "streetAddress": {
+      "type": "string",
+      "required": false
+    },
+    "city": {
+      "type": "string",
+      "required": false
+    },
+    "country": {
+      "type": "string",
+      "required": false
+    },
+    "zipCode": {
+      "type": "string",
+      "required": false
+    },
+    "email": {
+      "type": "string",
+      "required": false
+    },
+    "phone": {
+      "type": "string",
+      "required": false
     },
     "dateOfBirth": {
       "type": "date",
