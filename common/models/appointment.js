@@ -545,4 +545,85 @@ module.exports = function(Appointment) {
     }
   };
 
+  Appointment.remoteMethod(
+    'findDeep',
+    {
+      description: 'Find all instances of the model matched by filter from the data ' +
+      'source, including resolved related instances.',
+      http: {path: '/findDeep', verb: 'get'},
+      accepts: [
+        {arg: 'filter', type: 'string', http: {source: 'query'}}
+      ],
+      returns: {arg: 'appointments', type: 'object', root: true}
+    }
+  );
+
+  Appointment.findDeep = function(filter, cb) {
+    Appointment.find(filter, function(err, appointments) {
+      if (err) {
+        cb(err);
+      } else {
+        async.map(appointments, function(item, mapCallback) {
+          async.parallel({
+              room: function(roomCallback) {
+                item.room(function(err, room) {
+                  if (err) {
+                    roomCallback(err);
+                  } else {
+                    roomCallback(null, room);
+                  }
+                });
+              },
+              patient: function(patientCallback) {
+                item.patient(function(err, patient) {
+                  if (err) {
+                    patientCallback(err);
+                  } else {
+                    patientCallback(null, patient);
+                  }
+                });
+              },
+              examinations: function(examinationsCallback) {
+                item.examinations(function(err, examinations) {
+                  if (err) {
+                    examinationsCallback(err);
+                  } else {
+                    examinationsCallback(null, examinations);
+                  }
+                });
+              }
+            }, function(err, parallelResults) {
+              if (err) {
+                mapCallback(err);
+              } else {
+                var transformed = {};
+                transformed.id = item.id;
+                transformed.title = item.title;
+                transformed.start = item.start;
+                transformed.end = item.end;
+                transformed.autoAppointmentBlockedSecret =
+                  item.autoAppointmentBlockedSecret;
+                transformed.created = item.created;
+                transformed.createdBy = item.ecreatedBynd;
+                transformed.modified = item.modified;
+                transformed.modifiedBy = item.modifiedBy;
+                transformed.room = parallelResults.room;
+                transformed.roomId = item.roomId;
+                transformed.patient = parallelResults.patient;
+                transformed.patientId = item.patientId;
+                transformed.examinations = parallelResults.examinations;
+                mapCallback(null, transformed);
+              }
+            });
+        }, function(err, mapResults) {
+            if (err) {
+              cb(err);
+            } else {
+              cb(null, mapResults);
+            }
+          });
+      }
+    });
+  };
+
 };
