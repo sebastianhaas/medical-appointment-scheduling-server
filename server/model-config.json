@@ -17,7 +17,7 @@
     "dataSource": "postgresql",
     "public": true
   },
-   "Attendance": {
+  "Attendance": {
     "dataSource": "postgresql",
     "public": true
   },
@@ -35,6 +35,10 @@
   },
   "Room": {
     "dataSource": "postgresql",
+    "public": true
+  },
+  "Mail": {
+    "dataSource": "fakesmtp",
     "public": true
   }
 }

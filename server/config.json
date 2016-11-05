@@ -24,9 +24,14 @@
     }
   },
   "legacyExplorer": false,
-
-
+  "clientAutoAppointmentAcceptEndpoint": "http://localhost:8080/appointment/accept/",
   "businessHoursStart": "08:00:00",
   "businessHoursEnd": "17:00:00",
-  "businessDays": [2, 3, 4, 5, 6]
+  "businessDays": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ]
 }

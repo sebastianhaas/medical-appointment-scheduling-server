@@ -430,4 +430,119 @@ module.exports = function(Appointment) {
     );
   }
 
+  Appointment.remoteMethod(
+    'acceptOffer',
+    {
+      description: 'Accepts an offer by passing over the respective secret.',
+      http: {path: '/acceptOffer', verb: 'get'},
+      accepts: [
+        {arg: 'offerSecret', type: 'string', required: true, http: {source: 'query'}}
+      ],
+      returns: {arg: 'result', type: 'object', root: true}
+    }
+  );
+
+  Appointment.acceptOffer = function(offerSecret, cb) {
+    var filter = {
+      where: {
+        autoAppointmentBlockedSecret: offerSecret
+      }
+    };
+    Appointment.findOne(filter, function(err, offer) {
+      if (err) {
+        if (err.error.statusCode === 404 && err.error.statusCode === 'MODEL_NOT_FOUND') {
+          var error = new Error('No offer found for the given secret.');
+          error.status = 404;
+          error.code = 'NOT_FOUND_OR_EXPIRED';
+          cb(error);
+        } else {
+          // Other internal error, pass on
+          cb(err);
+        }
+      } else {
+        if (!offer) { // Not present in data store
+          err = new Error('No offer found for the given secret.');
+          err.status = 404;
+          err.code = 'NOT_FOUND_OR_EXPIRED';
+          cb(err);
+        } else {
+          // Success, now block it
+          offer.updateAttribute(
+            'autoAppointmentBlockedSecret',
+            null,
+            function(err, appointment) {
+              if (err) {
+                cb(err);
+              } else {
+                // Now remove all blocked appointments
+                Appointment.deleteAutoAppointmentSet(offerSecret, function(err) {
+                  if (err) {
+                    cb(err);
+                  } else {
+                    cb(null, appointment);
+                  }
+                });
+              }
+            });
+        }
+      }
+    });
+  };
+
+  /**
+   * Deletes an auto-appointment set by taking one of the three
+   * offer's secrets.
+   */
+  Appointment.deleteAutoAppointmentSet = function(offerSecret, cb) {
+    if (offerSecret) {
+      // Remove # bit from secret (last char)
+      offerSecret = offerSecret.slice(0, -1);
+      // Create all three secrets
+      var secrets = [];
+      for (var i = 0; i < 3; i++) {
+        secrets.push(offerSecret + i);
+      }
+
+      async.each(secrets, function(secret, callback) {
+        var filter = {
+          where: {
+            autoAppointmentBlockedSecret: secret
+          }
+        };
+        Appointment.findOne(filter, function(err, offer) {
+          if (err) {
+            if (err.error.statusCode === 404 &&
+             err.error.statusCode === 'MODEL_NOT_FOUND') {
+              // We ignore this, it has probably already been deleted or accepted
+              callback();
+            } else {
+              // Other internal error, pass on
+              callback(err);
+            }
+          } else {
+            if (offer) {
+              offer.destroy(function(err, result) {
+                if (err) {
+                  callback(err);
+                } else {
+                  callback();
+                }
+              });
+            } else {
+              callback();
+            }
+          }
+        });
+      }, function(err) {
+        if (err) {
+          cb(err);
+        } else {
+          cb();
+        }
+      });
+    } else {
+      cb(new Error('Secret invalid'));
+    }
+  };
+
 };

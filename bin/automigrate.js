@@ -6,4 +6,6 @@ ds.automigrate()
   .then(function(err) {
     if (err) { throw err; }
     ds.disconnect();
+    console.log('Automigration done.');
+    process.exit();
   });

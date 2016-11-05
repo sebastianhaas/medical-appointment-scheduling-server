@@ -21,6 +21,10 @@
     },
     "end": {
       "type": "date"
+    },
+    "autoAppointmentBlockedSecret": {
+      "type": "string",
+      "description": "This field allows the auto-appointment service to block appointments."
     }
   },
   "validations": [],

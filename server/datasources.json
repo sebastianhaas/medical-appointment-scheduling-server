@@ -8,5 +8,17 @@
     "user": "mas-dev",
     "debug": true,
     "connector": "postgresql"
+  },
+  "fakesmtp": {
+    "name": "fakesmtp",
+    "connector": "mail",
+    "transports": [
+      {
+        "type": "SMTP",
+        "host": "localhost",
+        "secure": false,
+        "port": 2525
+      }
+    ]
   }
 }
