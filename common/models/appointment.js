@@ -552,7 +552,7 @@ module.exports = function(Appointment) {
       'source, including resolved related instances.',
       http: {path: '/findDeep', verb: 'get'},
       accepts: [
-        {arg: 'filter', type: 'string', http: {source: 'query'}}
+        {arg: 'filter', type: 'object', http: {source: 'query'}}
       ],
       returns: {arg: 'appointments', type: 'object', root: true}
     }
