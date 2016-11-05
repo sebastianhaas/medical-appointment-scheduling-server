@@ -30,6 +30,7 @@
     "loopback-datasource-juggler": "^2.39.0",
     "lunr": "^0.7.2",
     "moment": "^2.14.1",
+    "node-schedule": "^1.2.0",
     "node-uuid": "^1.4.7",
     "schedulejs": "^0.6.3",
     "serve-favicon": "^2.0.1",

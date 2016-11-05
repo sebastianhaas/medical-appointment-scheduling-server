@@ -21,17 +21,20 @@ module.exports = function(Mail) {
   );
 
   Mail.autoAppointment = function(relayedMessages, cb) {
+    var blockDuration = 'PT30M';
     for (var i = 0; i < relayedMessages.length; i++) {
+      var msg;
+      var from;
       // Sparkpost specific, see https://developers.sparkpost.com/api/relay-webhooks.html
       // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
       /* jshint ignore:start */
-      var msg = relayedMessages[i].msys.relay_message.content;
-      var from = relayedMessages[i].msys.relay_message.friendly_from;
+      msg = relayedMessages[i].msys.relay_message.content;
+      from = relayedMessages[i].msys.relay_message.friendly_from;
       /* jshint ignore:end */
       // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
 
       // Get offers and hand them over by mail
-      getAutoAppointmentOffer(10, 'PT40M', 10, 0, function(err, offers) {
+      getAutoAppointmentOffer(blockDuration, 10, 'PT40M', 10, 0, function(err, offers) {
         if (err) {
           cb(err);
         } else {
@@ -43,12 +46,15 @@ module.exports = function(Mail) {
             text += Mail.app.get('clientAutoAppointmentAcceptEndpoint');
             text += offers[i].autoAppointmentBlockedSecret;
             text += '" >Accept</a><br /><br />';
+            text += '<br /><br />';
+            text += 'These reservations will be canceled automatically ';
+            text += moment.duration(blockDuration).humanize(true) + '.<br />';
           }
 
           // Found dates, now send them as mail
           Mail.send({
-            to: 'test@test.com',
-            from: 'sebastian@test.com',
+            to: from,
+            from: 'auto-appointment@scheduling-server.herokuapp.com',
             subject: 'Your requested appointment',
             text: text,
             html: text
@@ -73,10 +79,9 @@ module.exports = function(Mail) {
    * Returns an array of appointments that have been blocked for the
    * next 30 minutes.
    */
-  function getAutoAppointmentOffer(patientId, durationString,
+  function getAutoAppointmentOffer(blockDuration, patientId, durationString,
     examinationId, roomId, cb) {
     var secretBase = uuid.v4();
-    var blockDuration = 'PT1M';
     // Query for an appointment, with the earliest date set to three, ten and 20 days.
     parallel({
         threeDays: function(callback) {
