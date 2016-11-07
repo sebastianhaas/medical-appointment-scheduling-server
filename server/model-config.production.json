@@ -1,0 +1,44 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "Appointment": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "Attendance": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "Examination": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "Patient": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "AuditLogEntry": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "Room": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "Mail": {
+    "dataSource": "sparkpost",
+    "public": true
+  }
+}
