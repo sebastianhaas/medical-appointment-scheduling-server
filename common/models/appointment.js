@@ -434,7 +434,7 @@ module.exports = function(Appointment) {
     'acceptOffer',
     {
       description: 'Accepts an offer by passing over the respective secret.',
-      http: {path: '/acceptOffer', verb: 'get'},
+      http: {path: '/acceptOffer', verb: 'post'},
       accepts: [
         {arg: 'offerSecret', type: 'string', required: true, http: {source: 'query'}}
       ],
@@ -467,9 +467,14 @@ module.exports = function(Appointment) {
           cb(err);
         } else {
           // Success, now block it
-          offer.updateAttribute(
-            'autoAppointmentBlockedSecret',
-            null,
+          offer.updateAttributes(
+            {
+              autoAppointmentBlockedSecret: null,
+              title: null,
+              description:
+                'This appointment was automatically offered by mail, and accepted on ' +
+                moment().format('llll') + '.'
+            },
             function(err, appointment) {
               if (err) {
                 cb(err);
