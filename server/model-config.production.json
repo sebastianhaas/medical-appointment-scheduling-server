@@ -40,5 +40,9 @@
   "Mail": {
     "dataSource": "sparkpost",
     "public": true
+  },
+  "Notification": {
+    "dataSource": "postgresql",
+    "public": true
   }
 }

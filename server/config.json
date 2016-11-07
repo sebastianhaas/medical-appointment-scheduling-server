@@ -25,6 +25,8 @@
   },
   "legacyExplorer": false,
   "clientAutoAppointmentAcceptEndpoint": "http://localhost:8080/appointment/accept/",
+  "autoAppointmentFromAddress": "'Auto-Appointment Service' <auto-appointment@localhost>",
+  "autoAppointmentReplyToAddress": "'Patient Service' <patient-service@localhost>",
   "businessHoursStart": "08:00:00",
   "businessHoursEnd": "17:00:00",
   "businessDays": [

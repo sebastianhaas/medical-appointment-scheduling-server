@@ -32,6 +32,9 @@ module.exports = function(Mail) {
       from = relayedMessages[i].msys.relay_message.friendly_from;
       /* jshint ignore:end */
       // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
+      console.log('Inbound auto-appointment request.');
+      console.log('From: %s', from);
+      console.log('Messsage: %s', msg);
 
       // Get offers and hand them over by mail
       getAutoAppointmentOffer(blockDuration, 10, 'PT40M', 10, 0, function(err, offers) {
@@ -54,7 +57,12 @@ module.exports = function(Mail) {
           // Found dates, now send them as mail
           Mail.send({
             to: from,
-            from: 'auto-appointment@scheduling-server.herokuapp.com',
+            from: Mail.app.get('autoAppointmentFromAddress'),
+            // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
+            /* jshint ignore:start */
+            reply_to: Mail.app.get('autoAppointmentReplyToAddress'),
+            /* jshint ignore:end */
+            // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
             subject: 'Your requested appointment',
             text: text,
             html: text

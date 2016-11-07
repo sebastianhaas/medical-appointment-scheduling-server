@@ -40,5 +40,13 @@
   "Mail": {
     "dataSource": "fakesmtp",
     "public": true
+  },
+  "Notification": {
+    "dataSource": "postgresql",
+    "public": true
+  },
+  "NotificationTransport": {
+    "dataSource": null,
+    "public": false
   }
 }

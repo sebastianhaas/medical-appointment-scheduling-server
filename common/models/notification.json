@@ -1,0 +1,41 @@
+{
+  "name": "Notification",
+  "plural": "Notifications",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "contentText": {
+      "type": "string"
+    },
+    "contentHtml": {
+      "type": "string"
+    },
+    "schedule": {
+      "type": "object",
+      "required": true
+    },
+    "transport": {
+      "type": "NotificationTransport",
+      "required": true
+    },
+    "data": {
+      "type": "object"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "patient": {
+      "type": "belongsTo",
+      "model": "Patient"
+    },
+    "examination": {
+      "type": "belongsTo",
+      "model": "Examination"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
