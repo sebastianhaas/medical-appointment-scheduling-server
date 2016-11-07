@@ -35,7 +35,7 @@ module.exports = function(Examination) {
         return;
       }
       examinations.push({
-        name: language === 'de' ? csvrow[3] : csvrow[1],
+        name: language.startsWith('de') ? csvrow[3] : csvrow[1],
         code: csvrow[0],
         createdBy: 0,
         created: Date.now(),
