@@ -11,7 +11,7 @@ module.exports = {
       {
         type: 'SMTP',
         host: process.env.SPARKPOST_SMTP_HOST,
-        secure: true,
+        secureConnection: true,
         port: process.env.SPARKPOST_SMTP_PORT,
         auth: {
           user: process.env.SPARKPOST_SMTP_USERNAME,

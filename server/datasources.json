@@ -16,7 +16,7 @@
       {
         "type": "SMTP",
         "host": "localhost",
-        "secure": false,
+        "secureConnection": false,
         "port": 2525
       }
     ]
