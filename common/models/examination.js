@@ -8,13 +8,16 @@ module.exports = function(Examination) {
       description: 'Insert sample data set of test examinations.',
       http: {path: '/insertTestData', verb: 'post'},
       accepts: [
-        {arg: 'language', type: 'string', 'required': false, http: {source: 'query'}}
+        {arg: 'locale', type: 'string', 'required': false, http: {source: 'query'}}
       ],
       returns: {arg: 'insertCount', type: 'number'}
     }
   );
 
-  Examination.insertTestData = function(language, cb) {
+  Examination.insertTestData = function(locale, cb) {
+    if (!locale) {
+      locale = 'en_US';
+    }
     const path = require('path');
     const parse = require('csv-parse');
     const fs = require('fs');
@@ -35,7 +38,7 @@ module.exports = function(Examination) {
         return;
       }
       examinations.push({
-        name: language.startsWith('de') ? csvrow[3] : csvrow[1],
+        name: locale.startsWith('de') ? csvrow[3] : csvrow[1],
         code: csvrow[0],
         createdBy: 0,
         created: Date.now(),

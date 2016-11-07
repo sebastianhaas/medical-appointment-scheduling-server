@@ -60,6 +60,7 @@ module.exports = function(Mail) {
             html: text
           }, function(err, mail) {
             if (err) {
+              console.log(err);
               cb(err);
             } else {
               console.log('Email Sent!');
