@@ -5,5 +5,9 @@ module.exports = {
   autoAppointmentFromAddress:
     '\'Auto-Appointment Service\' <auto-appointment@sebastianhaas.online>',
   autoAppointmentReplyToAddress:
-    '\'Patient Service\' <patient-service@sebastianhaas.online>'
+    '\'Patient Service\' <patient-service@sebastianhaas.online>',
+  reminderFromAddress:
+    '\'Reminder Service\' <reminders@sebastianhaas.online>',
+  reminderReplyToAddress:
+    '\'No-Reply\' <no-reply@sebastianhaas.online>'
 };

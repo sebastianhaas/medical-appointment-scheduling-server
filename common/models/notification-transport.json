@@ -1,9 +1,9 @@
 {
   "name": "NotificationTransport",
   "base": "Model",
-  "idInjection": true,
+  "idInjection": false,
   "options": {
-    "validateUpsert": true
+    "validateUpsert": false
   },
   "properties": {
     "type": {

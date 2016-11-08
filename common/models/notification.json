@@ -13,16 +13,22 @@
     "contentHtml": {
       "type": "string"
     },
+    "subject": {
+      "type": "string"
+    },
     "schedule": {
       "type": "object",
       "required": true
     },
-    "transport": {
-      "type": "NotificationTransport",
+    "transports": {
+      "type": ["NotificationTransport"],
       "required": true
     },
     "data": {
       "type": "object"
+    },
+    "done": {
+      "type": "boolean"
     }
   },
   "validations": [],
@@ -31,9 +37,9 @@
       "type": "belongsTo",
       "model": "Patient"
     },
-    "examination": {
+    "appointment": {
       "type": "belongsTo",
-      "model": "Examination"
+      "model": "Appointment"
     }
   },
   "acls": [],
