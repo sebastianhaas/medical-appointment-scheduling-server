@@ -98,7 +98,7 @@ module.exports = function(Mail) {
             durationString,
             examinationId,
             roomId,
-            moment().add(3, 'days').toDate(),
+            moment().startOf('day').add(3, 'days').toDate(),
             function(err, schedule) {
               if (err) {
                 callback(err);
@@ -129,7 +129,7 @@ module.exports = function(Mail) {
             durationString,
             examinationId,
             roomId,
-            moment().add(10, 'days').toDate(),
+            moment().startOf('day').add(10, 'days').toDate(),
             function(err, schedule) {
               if (err) {
                 callback(err);
@@ -160,7 +160,7 @@ module.exports = function(Mail) {
             durationString,
             examinationId,
             roomId,
-            moment().add(20, 'days').toDate(),
+            moment().startOf('day').add(20, 'days').toDate(),
             function(err, schedule) {
               if (err) {
                 callback(err);
