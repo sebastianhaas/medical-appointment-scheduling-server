@@ -16,7 +16,7 @@
     "async": "^2.0.1",
     "bunyan": "^1.8.1",
     "bunyan-request": "^1.2.0",
-    "bunyan-syslog": "^0.3.1",
+    "bunyan-syslog": "github:mcavage/node-bunyan-syslog#9bdb9eb62a763c7d30e032a619138032d5ff8771",
     "compression": "^1.0.3",
     "cors": "^2.5.2",
     "csv-parse": "^1.1.7",
