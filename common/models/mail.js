@@ -44,13 +44,15 @@ module.exports = function(Mail) {
           var text = 'We are happy to offer you the following appointments:<br /><br />';
 
           for (var i = 0; i < offers.length; i++) {
-            text += JSON.stringify(offers[i]) + '<br />';
+            var offerDate = moment(offers[i].start);
+
+            text += offerDate.format('LLLL') + '<br />';
             text += '<a href="';
             text += Mail.app.get('clientAutoAppointmentAcceptEndpoint');
             text += offers[i].autoAppointmentBlockedSecret;
             text += '" >Accept</a><br /><br />';
             text += '<br /><br />';
-            text += 'These reservations will be canceled automatically ';
+            text += 'These reservations will be cancelled automatically ';
             text += moment.duration(blockDuration).humanize(true) + '.<br />';
           }
 
