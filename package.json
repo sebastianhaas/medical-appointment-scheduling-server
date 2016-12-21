@@ -25,7 +25,7 @@
     "helmet": "^3.0.0",
     "loopback": "^2.22.0",
     "loopback-boot": "^2.6.5",
-    "loopback-component-explorer": "^2.4.0",
+    "loopback-component-explorer": "^4.0.0",
     "loopback-connector-postgresql": "^2.4.1",
     "loopback-datasource-juggler": "^2.39.0",
     "lunr": "^0.7.2",
