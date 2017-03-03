@@ -2,7 +2,6 @@ var loopback = require('loopback');
 var boot = require('loopback-boot');
 var bunyan = require('bunyan');
 var bunyanRequest = require('bunyan-request');
-var bunyanSyslog = require('bunyan-syslog');
 
 var app = module.exports = loopback();
 
@@ -10,20 +9,11 @@ var app = module.exports = loopback();
 var logger = bunyan.createLogger({
   name: 'medical-appointment-scheduling-server',
   streams: [
-  {
-    level: 'debug',
-    type: 'raw',
-    stream: bunyanSyslog.createBunyanStream({
-      type: 'udp',
-      facility: bunyanSyslog.local0,
-      host: '127.0.0.1',
-      port: 11111
-    })
-  },
-  {
-    level: 'debug',
-    stream: process.stdout
-  }]
+    {
+      level: 'debug',
+      stream: process.stdout
+    }
+  ]
 });
 var requestLogger = bunyanRequest({
   logger: logger,

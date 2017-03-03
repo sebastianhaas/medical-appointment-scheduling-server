@@ -1,6 +1,6 @@
 {
   "final:after": {
-    "loopback#errorHandler": {
+    "strong-error-handler": {
       "params": {
         "includeStack": false
       }

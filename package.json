@@ -16,30 +16,29 @@
     "async": "^2.0.1",
     "bunyan": "^1.8.1",
     "bunyan-request": "^1.2.0",
-    "bunyan-syslog": "github:mcavage/node-bunyan-syslog#9bdb9eb62a763c7d30e032a619138032d5ff8771",
-    "compression": "^1.0.3",
-    "cors": "^2.5.2",
+    "compression": "^1.6.2",
+    "cors": "^2.8.1",
     "csv-parse": "^1.1.7",
     "gaussian": "^1.1.0",
     "google-material-color": "^1.2.6",
     "helmet": "^3.0.0",
-    "loopback": "^3.2.1",
-    "loopback-boot": "^2.6.5",
-    "loopback-component-explorer": "^4.0.0",
-    "loopback-connector-postgresql": "^2.4.1",
+    "loopback": "^3.4.0",
+    "loopback-boot": "^2.23.0",
+    "loopback-component-explorer": "^4.1.1",
+    "loopback-connector-postgresql": "^2.7.0",
     "loopback-datasource-juggler": "^3.2.0",
     "lunr": "^1.0.0",
     "moment": "^2.14.1",
     "node-schedule": "^1.2.0",
     "node-uuid": "^1.4.7",
     "schedulejs": "^0.6.3",
-    "serve-favicon": "^2.0.1",
+    "serve-favicon": "^2.4.1",
     "socket.io": "1.7.3"
   },
   "devDependencies": {
     "jscs": "^3.0.4",
     "jshint": "^2.5.6",
-    "nsp": "^2.1.0"
+    "nsp": "^2.6.2"
   },
   "repository": {
     "type": "git",
@@ -49,7 +48,7 @@
     "url": "https://github.com/sebastianhaas/medical-appointment-scheduling-server.git/issues"
   },
   "engines": {
-    "node": ">= 5.8.0",
-    "npm": ">= 3.9.5"
+    "node": "^6.10.0",
+    "npm": "^3.10.10"
   }
 }
