@@ -1,0 +1,112 @@
+{
+  "sections": [
+    {
+      "sectionNumber": "0",
+      "title": "Procedures And Interventions, Not Elsewhere Classified (00)",
+      "start": 1,
+      "end": 80
+    },
+    {
+      "sectionNumber": "1",
+      "title": "Operations On The Nervous System (01-05)",
+      "start": 81,
+      "end": 219
+    },
+    {
+      "sectionNumber": "2",
+      "title": "Operations On The Endocrine System (06-07)",
+      "start": 220,
+      "end": 292
+    },
+    {
+      "sectionNumber": "3",
+      "title": "Operations On The Eye (08-16)",
+      "start": 293,
+      "end": 579
+    },
+    {
+      "sectionNumber": "3a",
+      "title": "Other Miscellaneous Diagnostic And Therapeutic Procedures (17)",
+      "start": 580,
+      "end": 612
+    },
+    {
+      "sectionNumber": "4",
+      "title": "Operations On The Ear (18-20)",
+      "start": 613,
+      "end": 671
+    },
+    {
+      "sectionNumber": "5",
+      "title": "Operations On The Nose, Mouth, And Pharynx (21-29)",
+      "start": 672,
+      "end": 850
+    },
+    {
+      "sectionNumber": "6",
+      "title": "Operations On The Respiratory System (30-34)",
+      "start": 851,
+      "end": 985
+    },
+    {
+      "sectionNumber": "7",
+      "title": "Operations On The Cardiovascular System (35-39)",
+      "start": 986,
+      "end": 1274
+    },
+    {
+      "sectionNumber": "8",
+      "title": "Operations On The Hemic And Lymphatic System (40-41)",
+      "start": 1275,
+      "end": 1326
+    },
+    {
+      "sectionNumber": "9",
+      "title": "Operations On The Digestive System (42-54)",
+      "start": 1327,
+      "end": 1797
+    },
+    {
+      "sectionNumber": "10",
+      "title": "Operations On The Urinary System (55-59)",
+      "start": 1798,
+      "end": 1958
+    },
+    {
+      "sectionNumber": "11",
+      "title": "Operations On The Male Genital Organs (60-64)",
+      "start": 1959,
+      "end": 2062
+    },
+    {
+      "sectionNumber": "12",
+      "title": "Operations On The Female Genital Organs (65-71)",
+      "start": 2063,
+      "end": 2258
+    },
+    {
+      "sectionNumber": "13",
+      "title": "Obstetrical Procedures (72-75)",
+      "start": 2259,
+      "end": 2322
+    },
+    {
+      "sectionNumber": "14",
+      "title": "Operations On The Musculoskeletal System (76-84)",
+      "start": 2323,
+      "end": 2991
+    },
+    {
+      "sectionNumber": "15",
+      "title": "Operations On The Integumentary System (85-86)",
+      "start": 2992,
+      "end": 3100
+    },
+    {
+      "sectionNumber": "16",
+      "title": "Miscellaneous Diagnostic And Therapeutic Procedures (87-99)",
+      "start": 3101,
+      "end": 3883
+    }
+  ]
+}

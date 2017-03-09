@@ -8,19 +8,21 @@ module.exports = function(Examination) {
       description: 'Insert sample data set of test examinations.',
       http: {path: '/insertTestData', verb: 'post'},
       accepts: [
+        {arg: 'sectionNumber', type: 'string', 'required': true, http: {source: 'query'}},
         {arg: 'locale', type: 'string', 'required': false, http: {source: 'query'}}
       ],
       returns: {arg: 'insertCount', type: 'number'}
     }
   );
 
-  Examination.insertTestData = function(locale, cb) {
+  Examination.insertTestData = function(sectionNumber, locale, cb) {
     if (!locale) {
       locale = 'en_US';
     }
     const path = require('path');
     const parse = require('csv-parse');
     const fs = require('fs');
+    const groups = require(path.join(__dirname, '../../test/data/examination-groups.json'));
     const materialPaletts = require('google-material-color').palette;
     delete materialPaletts.White;
     delete materialPaletts.Black;
@@ -30,13 +32,24 @@ module.exports = function(Examination) {
     var examinations = [];
     var header = true;
 
+    // Get selected section
+    var section = groups.sections.find(function(section) {
+      if(section.sectionNumber === sectionNumber) {
+        return section;
+      }
+    });
+    if (!section) {
+      cb(new Error('Invalid section: ' + sectionNumber));
+    }
+
     fs.createReadStream(path.join(__dirname, testData))
-    .pipe(parse())
+    .pipe(parse({ from: section.start, to: section.end }))
     .on('data', function(csvrow) {
       if (header) {
         header = false;
         return;
       }
+
       examinations.push({
         name: locale.startsWith('de') ? csvrow[3] : csvrow[1],
         code: csvrow[0],
