@@ -22,7 +22,9 @@ module.exports = function(Examination) {
     const path = require('path');
     const parse = require('csv-parse');
     const fs = require('fs');
-    const groups = require(path.join(__dirname, '../../test/data/examination-groups.json'));
+    const groups = require(
+      path.join(__dirname, '../../test/data/examination-groups.json')
+    );
     const materialPaletts = require('google-material-color').palette;
     delete materialPaletts.White;
     delete materialPaletts.Black;
@@ -34,7 +36,7 @@ module.exports = function(Examination) {
 
     // Get selected section
     var section = groups.sections.find(function(section) {
-      if(section.sectionNumber === sectionNumber) {
+      if (section.sectionNumber === sectionNumber) {
         return section;
       }
     });
@@ -43,7 +45,7 @@ module.exports = function(Examination) {
     }
 
     fs.createReadStream(path.join(__dirname, testData))
-    .pipe(parse({ from: section.start, to: section.end }))
+    .pipe(parse({from: section.start, to: section.end}))
     .on('data', function(csvrow) {
       if (header) {
         header = false;
