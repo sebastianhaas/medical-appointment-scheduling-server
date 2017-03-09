@@ -8,8 +8,16 @@ module.exports = function(Examination) {
       description: 'Insert sample data set of test examinations.',
       http: {path: '/insertTestData', verb: 'post'},
       accepts: [
-        {arg: 'sectionNumber', type: 'string', 'required': true, http: {source: 'query'}},
-        {arg: 'locale', type: 'string', 'required': false, http: {source: 'query'}}
+        {arg: 'sectionNumber', type: 'string', 'required': true,
+          http: {source: 'query'},
+          description: 'The section number according to ' +
+            'http://icd9cm.chrisendres.com/index.php?action=procslist, ' +
+            'e.g. "3", "3A" or "12".'
+        },
+        {arg: 'locale', type: 'string', 'required': false, http: {source: 'query'},
+          description: 'The locale to use for test examinations. Defaults to "en_US". ' +
+            'Currently only "de_**" are available.'
+        }
       ],
       returns: {arg: 'insertCount', type: 'number'}
     }
