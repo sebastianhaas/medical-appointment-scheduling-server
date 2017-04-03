@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.org/sebastianhaas/medical-appointment-scheduling-server.svg?branch=master)](https://travis-ci.org/sebastianhaas/medical-appointment-scheduling-server)
 [![Join the chat at https://gitter.im/sebastianhaas/medical-appointment-scheduling](https://badges.gitter.im/sebastianhaas/medical-appointment-scheduling.svg)](https://gitter.im/sebastianhaas/medical-appointment-scheduling?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Dependency Status](https://david-dm.org/sebastianhaas/medical-appointment-scheduling-server.svg)](https://david-dm.org/sebastianhaas/medical-appointment-scheduling-server)
+[![Node Security Platform](https://nodesecurity.io/orgs/medical-appointment-scheduling/projects/8f9025c1-1e52-486a-9713-9bf443554d6f/badge)](https://nodesecurity.io/orgs/medical-appointment-scheduling/projects/8f9025c1-1e52-486a-9713-9bf443554d6f)
 
 This is a backend for [sebastianhaas/medical-appointment-scheduling](https://github.com/sebastianhaas/medical-appointment-scheduling) built with loopback (express).
 
