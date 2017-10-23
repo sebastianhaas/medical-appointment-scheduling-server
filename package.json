@@ -23,7 +23,7 @@
     "google-material-color": "^1.2.6",
     "helmet": "^3.0.0",
     "loopback": "^3.4.0",
-    "loopback-boot": "^2.23.0",
+    "loopback-boot": "^2.27.0",
     "loopback-component-explorer": "^5.0.0",
     "loopback-connector-postgresql": "^3.0.0",
     "loopback-datasource-juggler": "^3.2.0",
