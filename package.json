@@ -25,7 +25,7 @@
     "loopback": "^3.4.0",
     "loopback-boot": "^2.23.0",
     "loopback-component-explorer": "^5.0.0",
-    "loopback-connector-postgresql": "^3.0.0",
+    "loopback-connector-postgresql": "^3.2.0",
     "loopback-datasource-juggler": "^3.2.0",
     "lunr": "^2.0.0",
     "moment": "^2.14.1",
