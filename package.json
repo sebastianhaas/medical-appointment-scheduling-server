@@ -28,7 +28,7 @@
     "loopback-connector-postgresql": "^3.0.0",
     "loopback-datasource-juggler": "^3.2.0",
     "lunr": "^2.0.0",
-    "moment": "^2.14.1",
+    "moment": "^2.19.3",
     "node-schedule": "^1.2.0",
     "node-uuid": "^1.4.7",
     "schedulejs": "^0.6.3",
