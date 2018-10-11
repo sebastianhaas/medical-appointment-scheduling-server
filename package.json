@@ -15,7 +15,7 @@
   "dependencies": {
     "async": "^2.0.1",
     "bunyan": "^1.8.1",
-    "bunyan-request": "^1.2.0",
+    "bunyan-request": "^1.4.0",
     "compression": "^1.6.2",
     "cors": "^2.8.1",
     "csv-parse": "^1.1.7",
