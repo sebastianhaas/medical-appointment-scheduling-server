@@ -17,7 +17,7 @@
     "bunyan": "^1.8.1",
     "bunyan-request": "^1.2.0",
     "compression": "^1.6.2",
-    "cors": "^2.8.1",
+    "cors": "^2.8.5",
     "csv-parse": "^1.1.7",
     "gaussian": "^1.1.0",
     "google-material-color": "^1.2.6",
