@@ -16,7 +16,7 @@
     "async": "^2.0.1",
     "bunyan": "^1.8.1",
     "bunyan-request": "^1.2.0",
-    "compression": "^1.6.2",
+    "compression": "^1.7.4",
     "cors": "^2.8.1",
     "csv-parse": "^1.1.7",
     "gaussian": "^1.1.0",
