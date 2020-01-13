@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "jscs": "^3.0.4",
-    "jshint": "^2.5.6",
+    "jshint": "^2.11.0",
     "nsp": "^2.6.2"
   },
   "repository": {
