@@ -21,7 +21,7 @@
     "csv-parse": "^1.1.7",
     "gaussian": "^1.1.0",
     "google-material-color": "^1.2.6",
-    "helmet": "^3.0.0",
+    "helmet": "^3.21.3",
     "loopback": "^3.4.0",
     "loopback-boot": "^2.23.0",
     "loopback-component-explorer": "^5.0.0",
